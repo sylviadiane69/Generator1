@@ -1,73 +1,51 @@
+function generatePassword(charset, length) {
+  var length = 8
+  var retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
+function writePassword() {
+  // Write password to the #password input
+
+  const length = parseInt(prompt("What length do you want your password?"))
+  // check length
+
+  //Confirm Password meets length criteria
+  if (length < 8 || length > 128) {
+    alert("Password must be a minimum of 8 characters.");
+    return
+  }
+
+  var character = ""
+  const useSymbols = confirm("Do you want your password to use a symbol?")
+  if(useSymbols) {
+    character += "!@#$%&*"
+  }
+  const useLowerCase = confirm("Do you want your password to use a lower case letter?")
+  if(useLowerCase) {
+    character += "abcdefghijklmnopqrstuvwxyz"
+  }
+  const useNumbers = confirm("Do you want your password to use a number?")
+  if(useNumbers) {
+    character += "0123456789"
+  }
+  const useUpperCase = confirm("Do you want your password to use an upper case letter?")
+  if(useUpperCase) {
+    character += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  }
+  
+
+  var password = generatePassword(character, length);
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+
+}
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//Variables for password
-var low = "abcdefghijklmnopqrstuvwxyz";
-var upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var num = "0123456789";
-var sym = "!@#$%^&*+=";
-
-//Console for passwords
-console.log(low.length);
-console.log(upp.length);
-console.log(num.length);
-console.log(sym.length);
-
-//Ask user for lenght of password
-
-var passwordLength = prompt("How many characters in your password?");
-
-// Prompt for options 
-
-var low = prompt("Do you want a lower case letter?");
-
-const useLow = confirm("Do you want a lower case letter?");
-  if(useLow) {
-    characters += "abcdefghijklmnopqrstuvwxyz"
-  }
-
-var upp = prompt("Do you want a upper case letter?");
-
-  const useUpp = confirm("Do you want an upper case letter?");
-    if(useUpp) {
-      characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    }
-  
-  var num = prompt("Do you want a number?");
-
-    const useNum = confirm("Do you want a number?");
-      if(useNum) {
-        characters += "0123456789"
-      }
-
-  var sym = prompt("Do you want a symbol?");
-      if(useSym) {
-        characters += "!@#$%^&*+="
-      }
- 
-// Length set for password
-       if (length < 8 || length > 128) {
-        alert("Length of password must contain 8 characters.");
-      }
-
-// Array of all characters
-  var characters = ["low", "upp", "num", "sym"];
-
-// Functions to generate passwords
-  function generatePassword(characters, length) {
-    return Math.floor(Math.random() * 72);
-  }
-
-// Insuring password meets requirements
-function writePassword() {
-  var password = generatePassword(characters, length);
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);{
-
-}
+generateBtn.addEventListener("click", writePassword);
